@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import Details from './src/screens/details';
 import Home from './src/screens/home';
+import JobView from './src/screens/jobview';
 const Stack = createNativeStackNavigator();
 function App() {
   return (
@@ -22,6 +23,17 @@ function App() {
         <Stack.Screen
           name="Details"
           component={Details}
+          options={{
+            title: 'Job Hunter App',
+            headerStyle: {
+              backgroundColor: '#6a1b9a',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="JobView"
+          component={JobView}
           options={{
             title: 'Job Hunter App',
             headerStyle: {

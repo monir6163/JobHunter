@@ -2,7 +2,7 @@
 
 /* eslint-disable prettier/prettier */
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   FlatList,
   Image,
@@ -12,7 +12,6 @@ import {
   View,
 } from 'react-native';
 import {colors} from '../theme/colors';
-import {DATA} from '../utils/cateList';
 
 type JobItem = {
   id: string;
@@ -24,12 +23,23 @@ let numColumns = 2;
 
 export default function Job() {
   const navigation = useNavigation();
+  const [catData, setCatData] = React.useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(
+        'https://jobhunter.btebresultsbd.com/category/getAllCategories',
+      );
+      const json = await response.json();
+      setCatData(json?.categories);
+    }
+    fetchData();
+  }, []);
   return (
     <View style={styles.mainview}>
       <Text style={styles.catHeading}>চাকরির বিজ্ঞপ্তি</Text>
 
       <FlatList
-        data={DATA as JobItem[]}
+        data={catData as JobItem[]}
         renderItem={({item}) => {
           return (
             <TouchableOpacity
@@ -42,7 +52,7 @@ export default function Job() {
               }}>
               <View style={styles.itemContent}>
                 <Image
-                  source={item.image}
+                  source={{uri: item.image}}
                   style={styles.catImage}
                   resizeMode="cover"
                 />

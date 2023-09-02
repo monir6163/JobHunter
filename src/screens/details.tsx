@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {
   ActivityIndicator,
@@ -10,25 +11,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import JPG from '../../assets/images/jpg-icon.png';
 import {colors} from '../theme/colors';
+
+type JobItem = {
+  id: string;
+  name: string;
+  image: any;
+};
 
 export default function Details({route}: any) {
   const {id} = route.params;
   const [job, setJob] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const navigation = useNavigation();
   useEffect(() => {
-    function fetchData() {
-      try {
-        const response = require('../data/job.json');
-        const json = response;
-        //match id with job id
-        const jobFind = json.filter((item: {catId: any}) => item.catId === id);
-        setJob(jobFind);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      }
+    async function fetchData() {
+      const response = await fetch(
+        `https://jobhunter.btebresultsbd.com/allPost/${id}`,
+      );
+      const json = await response.json();
+      setJob(json?.posts);
+      setLoading(false);
     }
     fetchData();
   }, [id]);
@@ -41,17 +45,21 @@ export default function Details({route}: any) {
         </View>
       ) : (
         <FlatList
-          data={job}
+          data={job as JobItem[]}
           renderItem={({item}) => {
             return (
               <>
-                <TouchableOpacity style={styles.notes}>
+                <TouchableOpacity
+                  style={styles.notes}
+                  onPress={() => {
+                    navigation.navigate('JobView', {
+                      jobDetails: item,
+                    });
+                  }}>
                   <View style={styles.rowContainer}>
                     <View style={styles.imageContainer}>
                       <Image
-                        source={{
-                          uri: item.image,
-                        }}
+                        source={JPG}
                         resizeMode="contain"
                         style={styles.image}
                       />
@@ -64,14 +72,14 @@ export default function Details({route}: any) {
                           color: colors.green,
                           fontFamily: 'light',
                         }}>
-                        মোট ভিউ : {item.view}
+                        মোট ভিউ : {item.ViewCount}
                       </Text>
                       <Text
                         style={{
                           color: colors.lightGreen,
                           fontFamily: 'light',
                         }}>
-                        আবেদনের শেষ তারিখ : {item.date}
+                        আবেদনের শেষ তারিখ : {item.endDate}
                       </Text>
                     </View>
                   </View>
