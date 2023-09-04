@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {colors} from '../theme/colors';
 import {NoticeDATA} from '../utils/cateList';
+
 let noticecolumns = 3;
 
 export default function Notice() {
@@ -69,5 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.dark,
     textAlign: 'center',
+    fontFamily: 'kalpurush',
   },
 });

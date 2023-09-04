@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.grey,
     marginBottom: 10,
+    fontFamily: 'kalpurush',
   },
   item: {
     flex: 1,
@@ -98,5 +99,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.white,
     alignItems: 'center',
+    fontFamily: 'kalpurush',
   },
 });

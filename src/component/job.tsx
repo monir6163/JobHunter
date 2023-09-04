@@ -1,9 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 
 /* eslint-disable prettier/prettier */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
@@ -24,6 +26,7 @@ let numColumns = 2;
 export default function Job() {
   const navigation = useNavigation();
   const [catData, setCatData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -31,13 +34,19 @@ export default function Job() {
       );
       const json = await response.json();
       setCatData(json?.categories);
+      setLoading(false);
     }
     fetchData();
   }, []);
+
   return (
     <View style={styles.mainview}>
       <Text style={styles.catHeading}>চাকরির বিজ্ঞপ্তি</Text>
-
+      {loading && (
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
       <FlatList
         data={catData as JobItem[]}
         renderItem={({item}) => {
@@ -83,6 +92,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.grey,
     marginBottom: 10,
+    fontFamily: 'kalpurush',
   },
 
   item: {
@@ -110,5 +120,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.white,
     alignItems: 'center',
+    fontFamily: 'kalpurush',
   },
 });

@@ -13,13 +13,13 @@ import Private from '../../assets/images/private.png';
 import Question from '../../assets/images/qa.png';
 import Result from '../../assets/images/result.png';
 
-const DATA = [
-  {id: '1', name: 'সরকারি', image: Govt},
-  {id: '2', name: 'বেসরকারি', image: Private},
-  {id: '3', name: 'শিক্ষক নিয়োগ', image: Education},
-  {id: '4', name: 'ব্যাংক', image: Bank},
-  {id: '5', name: 'এনজিও', image: Enjiyo},
-  {id: '6', name: 'চাকরির পত্রিকা', image: Potrika},
+const JobDATA = [
+  {id: '3', name: 'সরকারি', image: Govt},
+  {id: '4', name: 'বেসরকারি', image: Private},
+  {id: '5', name: 'শিক্ষক নিয়োগ', image: Education},
+  {id: '6', name: 'ব্যাংক', image: Bank},
+  {id: '7', name: 'এনজিও', image: Enjiyo},
+  {id: '8', name: 'চাকরির পত্রিকা', image: Potrika},
 ];
 const NoticeDATA = [
   {id: '1', name: 'নোটিশ', image: Notice},
@@ -34,4 +34,4 @@ const jobPreparetion = [
   {id: '4', name: 'সাধারণ জ্ঞান', image: General},
 ];
 
-export {DATA, NoticeDATA, jobPreparetion};
+export {JobDATA, NoticeDATA, jobPreparetion};

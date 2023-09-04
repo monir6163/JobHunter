@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -24,6 +25,7 @@ export default function Details({route}: any) {
   const {id} = route.params;
   const [job, setJob] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [refreshing, setRefreshing] = React.useState(false);
   const navigation = useNavigation();
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +39,20 @@ export default function Details({route}: any) {
     fetchData();
   }, [id]);
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    async function fetchData() {
+      const response = await fetch(
+        `https://jobhunter.btebresultsbd.com/allPost/${id}`,
+      );
+      const json = await response.json();
+      setJob(json?.posts);
+      setLoading(false);
+    }
+    fetchData();
+    setRefreshing(false);
+  }, [id]);
+
   return (
     <View style={styles.container}>
       {loading ? (
@@ -45,6 +61,13 @@ export default function Details({route}: any) {
         </View>
       ) : (
         <FlatList
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={[colors.purple, colors.lightGreen, colors.green]}
+            />
+          }
           data={job as JobItem[]}
           renderItem={({item}) => {
             return (
@@ -66,18 +89,20 @@ export default function Details({route}: any) {
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.title}>{item.title}</Text>
-                      <Text style={styles.circularCat}>{item.circularCat}</Text>
+                      <Text style={styles.circularCat}>
+                        {item.category.name}
+                      </Text>
                       <Text
                         style={{
                           color: colors.green,
-                          fontFamily: 'light',
+                          fontFamily: 'kalpurush',
                         }}>
                         মোট ভিউ : {item.ViewCount}
                       </Text>
                       <Text
                         style={{
                           color: colors.lightGreen,
-                          fontFamily: 'light',
+                          fontFamily: 'kalpurush',
                         }}>
                         আবেদনের শেষ তারিখ : {item.endDate}
                       </Text>
@@ -114,10 +139,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     paddingBottom: 5,
+    fontFamily: 'kalpurush',
   },
   circularCat: {
     fontSize: 12,
     color: '#ddfe34',
+    fontFamily: 'kalpurush',
   },
   rowContainer: {
     flexDirection: 'row',

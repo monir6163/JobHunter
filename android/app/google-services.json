@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "128294879659",
+    "project_id": "jobhunter-5ae86",
+    "storage_bucket": "jobhunter-5ae86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128294879659:android:bf77a5a952a682fa6392ee",
+        "android_client_info": {
+          "package_name": "com.jobhunter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128294879659-orv6dscjeqnsmvrmlirdaq7l7dr6lisn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jobhunter",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "128294879659-t0j55kldcd950pl8ha30noc0dgu9fvmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSYa_ZmzMQrH7HKn4Tm90YA_ZL_R3vYrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128294879659-t0j55kldcd950pl8ha30noc0dgu9fvmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
