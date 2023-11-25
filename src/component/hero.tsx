@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 
 /* eslint-disable prettier/prettier */
+import LottieView from 'lottie-react-native';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import Search from '../../assets/images/search.gif';
+import {StyleSheet, Text, View} from 'react-native';
 import {colors} from '../theme/colors';
 import Notice from './notice';
 
@@ -11,13 +11,21 @@ export default function Hero() {
   return (
     <>
       <View style={styles.heroConiter}>
-        <View style={styles.hero}>
-          <Image source={Search} style={styles.heroImage} />
-          <Text style={styles.texthead}>
-            Stay Always And Find Your Dream Job
-          </Text>
+        <View style={styles.imageContainer}>
+          <View style={styles.imagelottie}>
+            <LottieView
+              source={require('../../assets/images/hero.json')}
+              autoPlay
+              style={styles.heroImage}
+            />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.texthead}>
+              সর্বদা সাথে থাকুন আপনার স্বপ্নের জব খুঁজুন
+            </Text>
+            <Text style={styles.subHead}>Job Hunter</Text>
+          </View>
         </View>
-        <Text style={styles.subHead}>Job Hunter App</Text>
         <Notice />
       </View>
     </>
@@ -28,31 +36,37 @@ const styles = StyleSheet.create({
   heroConiter: {
     backgroundColor: colors.purple,
   },
-  hero: {
+  imageContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    marginTop: 10,
   },
-
+  imagelottie: {
+    width: 100,
+    height: 100,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
   heroImage: {
-    width: 50,
-    height: 50,
-    resizeMode: 'contain',
+    width: 100,
+    height: 100,
+  },
+  textContainer: {
+    flex: 1,
+    alignSelf: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 10,
   },
   texthead: {
     color: colors.white,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'right',
+    fontSize: 14,
+    marginBottom: 5,
+    fontFamily: 'Kalpurush',
   },
   subHead: {
     color: colors.white,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'right',
-    paddingHorizontal: 10,
-    marginTop: -20,
   },
 });

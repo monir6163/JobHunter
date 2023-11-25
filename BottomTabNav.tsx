@@ -15,15 +15,25 @@ const BottomTabNav = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: '#6F2ED6',
+        tabBarInactiveTintColor: '#435B66',
       }}>
       <Tab.Screen
         name="Home2"
         component={Home}
         options={{
           tabBarLabel: 'হোম',
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="home-outline" color={color} size={size} />
+          tabBarIcon: ({focused, color, size}) => (
+            <Ionicons
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+              size={size}
+            />
           ),
+          tabBarLabelStyle: {
+            fontSize: 16,
+            fontFamily: 'Kalpurush',
+          },
         }}
       />
       <Tab.Screen
@@ -31,9 +41,17 @@ const BottomTabNav = () => {
         component={Rate}
         options={{
           tabBarLabel: 'রেটিং',
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="star-outline" color={color} size={size} />
+          tabBarIcon: ({focused, color, size}) => (
+            <Ionicons
+              name={focused ? 'star' : 'star-outline'}
+              color={color}
+              size={size}
+            />
           ),
+          tabBarLabelStyle: {
+            fontSize: 16,
+            fontFamily: 'Kalpurush',
+          },
         }}
       />
       <Tab.Screen
@@ -41,13 +59,19 @@ const BottomTabNav = () => {
         component={Info}
         options={{
           tabBarLabel: 'তথ্য',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({focused, color, size}) => (
             <Ionicons
-              name="information-circle-outline"
+              name={
+                focused ? 'information-circle' : 'information-circle-outline'
+              }
               color={color}
               size={size}
             />
           ),
+          tabBarLabelStyle: {
+            fontSize: 16,
+            fontFamily: 'Kalpurush',
+          },
         }}
       />
     </Tab.Navigator>

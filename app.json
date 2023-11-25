@@ -1,4 +1,7 @@
 {
   "name": "JobHunter",
-  "displayName": "JobHunter"
+  "displayName": "JobHunter",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-2727511358397949~4199262822"
+  }
 }

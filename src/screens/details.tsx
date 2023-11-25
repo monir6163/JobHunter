@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import {useNavigation} from '@react-navigation/native';
@@ -13,27 +14,24 @@ import {
   View,
 } from 'react-native';
 import JPG from '../../assets/images/jpg-icon.png';
+import {JobItem} from '../../type';
+import BannerAds from '../component/admob/bannerAds';
 import {colors} from '../theme/colors';
-
-type JobItem = {
-  id: string;
-  name: string;
-  image: any;
-};
 
 export default function Details({route}: any) {
   const {id} = route.params;
-  const [job, setJob] = React.useState([]);
+  const [job, setJob] = React.useState<JobItem[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation() as any;
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
         `https://jobhunter.btebresultsbd.com/allPost/${id}`,
       );
       const json = await response.json();
-      setJob(json?.posts);
+      let newJob: JobItem[] = json?.posts;
+      setJob(newJob);
       setLoading(false);
     }
     fetchData();
@@ -82,7 +80,7 @@ export default function Details({route}: any) {
                   <View style={styles.rowContainer}>
                     <View style={styles.imageContainer}>
                       <Image
-                        source={JPG}
+                        source={JPG || ''}
                         resizeMode="contain"
                         style={styles.image}
                       />
@@ -116,6 +114,8 @@ export default function Details({route}: any) {
           contentContainerStyle={styles.contentContainerStyle}
         />
       )}
+
+      <BannerAds />
     </View>
   );
 }
